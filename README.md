@@ -94,7 +94,7 @@ Browsing for a file should be a no brainer. Be sure to select a file that is not
 
 Sending really large files can be troublesome and depends on whether or not encryption is enabled, and it depends on the chosen strategy for receiving the file on the server. I haven't experimented with the software myself so much that I can say exactly how each factor play out. Sending large files using encryption and the default SunJCE provider which this software use, **is** problematic due to [internal buffering](http://stackoverflow.com/q/26920906/1268003).
 
-Therefore, *the file may be sent in chunks*. Simply tick the "Send in chunks" radiobutton and select a chunk size. This will make the client send the file in chunks. The server will save each chunks to a temporary file in his ordinary save folder, and once all chunks has been transferred, the chunks are merged into one file and deleted.
+Therefore, *the file may be sent in chunks*. Simply tick the "Send in chunks" radio button and select a chunk size. This will make the client send the file in chunks. The server will save each chunks to a temporary file in his ordinary save folder, and once all chunks has been transferred, the chunks are merged into one file and deleted.
 
 It is expected that an encrypted and chunked file transfer is faster than sending an encrypted file in one piece. However, my experience has shown me that it is *dramatically much faster* and that one gain a huge amount of speed even when chunked file transfer is enabled to send unencrypted files.
 
