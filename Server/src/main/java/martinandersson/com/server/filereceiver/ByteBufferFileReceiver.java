@@ -28,8 +28,8 @@ public class ByteBufferFileReceiver extends AbstractByteFileReceiver<ByteBuffer,
     }
 
     @Override
-    protected boolean hasBytes(ByteBuffer bufferSource) {
-        return bufferSource.hasRemaining();
+    protected boolean hasBytes(ByteBuffer part) {
+        return part.hasRemaining();
     }
     
     @Override

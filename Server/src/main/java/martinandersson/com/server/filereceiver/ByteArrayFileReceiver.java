@@ -28,8 +28,8 @@ public class ByteArrayFileReceiver extends AbstractByteFileReceiver<byte[], Outp
     }
 
     @Override
-    protected boolean hasBytes(byte[] bufferSource) {
-        return bufferSource.length > 0;
+    protected boolean hasBytes(byte[] part) {
+        return part.length > 0;
     }
     
     @Override
