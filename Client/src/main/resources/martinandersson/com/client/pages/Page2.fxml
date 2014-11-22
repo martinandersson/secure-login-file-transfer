@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" styleClass="no-background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="martinandersson.com.client.pages.Page2Controller">
+    <content>
+          <HBox alignment="CENTER" fillHeight="false" VBox.vgrow="ALWAYS">
+              <children>
+                  <GridPane fx:id="content" styleClass="content" stylesheets="@Page2.css">
+                      <columnConstraints>
+                          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                          <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints />
+                          <RowConstraints />
+                          <RowConstraints />
+                      </rowConstraints>
+                      <children>
+                          <Label minWidth="-Infinity" text="Username" />
+                          <Label minWidth="-Infinity" text="Password" GridPane.columnIndex="1" />
+                          <TextField fx:id="tfUsername1" GridPane.rowIndex="1" />
+                          <TextField fx:id="tfPassword1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                          <TextField fx:id="tfUsername2" GridPane.rowIndex="2" />
+                          <TextField fx:id="tfPassword2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                          <Button fx:id="btnRegister" minWidth="-Infinity" mnemonicParsing="false" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                          <Button fx:id="btnAuthenticate" minWidth="-Infinity" mnemonicParsing="false" text="Authenticate" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                      </children>
+                  </GridPane>
+              </children>
+          </HBox>
+    </content>
+</ScrollPane>

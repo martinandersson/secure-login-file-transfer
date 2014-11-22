@@ -1,0 +1,35 @@
+.tool-bar {
+    -fx-rotate: 180;
+    -fx-alignment: center-right;
+    -fx-border-style: solid;
+    -fx-border-width: 1 0 1 0;
+    /* top = bottom because toolbar is rotated! */
+    -fx-border-color: #bbbbbb transparent #bbbbbb transparent;
+}
+
+.tool-bar .label {
+    -fx-rotate: 180;
+}
+
+.content {
+    -fx-spacing: 10;
+    -fx-padding: 15 15 25 15;
+}
+
+.content-last {
+    -fx-spacing: 10;
+    -fx-padding: 15 15 0 15;
+}
+
+.child-check-box-first {
+    -fx-translate-x: 15;
+}
+
+.child-check-box-second {
+    -fx-translate-x: 30;
+}
+
+.strategy {
+    -fx-vgap: 10;
+    -fx-hgap: 10;
+}

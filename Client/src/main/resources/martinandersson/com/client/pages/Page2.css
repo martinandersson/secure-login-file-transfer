@@ -1,0 +1,8 @@
+.content {
+    -fx-hgap: 10;
+    -fx-vgap: 5;
+}
+
+.text-field {
+    -fx-alignment: center;
+}

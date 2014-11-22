@@ -1,0 +1,14 @@
+.content {
+    -fx-alignment: center;
+    -fx-fill-width: false;
+    -fx-spacing: 18;
+}
+
+.radios {
+    -fx-spacing: 6;
+    -fx-fill-width: true;
+}
+
+.textfield-radiobutton {
+    -fx-alignment: center;
+}

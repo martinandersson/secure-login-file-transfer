@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections ?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" styleClass="no-background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="martinandersson.com.client.pages.Page1Controller">
+   <content>
+      <VBox styleClass="content" stylesheets="@Page1.css" VBox.vgrow="ALWAYS">
+          <children>
+              <Label text="Please pick an URL!" />
+              <VBox styleClass="radios">
+                  <children>
+                      <HBox styleClass="textfield-radiobutton">
+                          <children>
+                              <RadioButton fx:id="rbCustom" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false">
+                                  <toggleGroup>
+                                      <ToggleGroup fx:id="radioButtons" />
+                                  </toggleGroup>
+                                  <VBox.margin>
+                                      <Insets />
+                                  </VBox.margin>
+                              </RadioButton>
+                              <TextField fx:id="tfCustom" maxWidth="1.7976931348623157E308" promptText="Type in a custom URL" HBox.hgrow="ALWAYS" />
+                          </children>
+                      </HBox>
+                      <RadioButton fx:id="rbWildFly" mnemonicParsing="false" text="WildFly (ws://localhost:8080/Server-1.0.0-SNAPSHOT/mywebsocket)" toggleGroup="$radioButtons" />
+                      <RadioButton fx:id="rbGlassFish" mnemonicParsing="false" text="GlassFish (ws://localhost:8080/Server/mywebsocket)" toggleGroup="$radioButtons" />
+                  </children>
+              </VBox>
+              <Button fx:id="btnConnect" mnemonicParsing="false" text="Connect" />
+          </children>
+      </VBox>
+   </content>
+</ScrollPane>

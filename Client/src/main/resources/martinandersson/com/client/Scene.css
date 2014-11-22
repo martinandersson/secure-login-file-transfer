@@ -1,0 +1,7 @@
+.no-background {
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-pref-width: 90;
+}

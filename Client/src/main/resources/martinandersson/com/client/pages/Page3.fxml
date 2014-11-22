@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.collections.FXCollections ?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" styleClass="no-background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="martinandersson.com.client.pages.Page3Controller">
+    <content>
+        <VBox stylesheets="@Page3.css">
+            <children>
+                <ToolBar>
+                    <items>
+                        <Label text="Select a file" />
+                    </items>
+                    <VBox.margin>
+                        <Insets right="1.0" />
+                    </VBox.margin>
+                </ToolBar>
+                <VBox alignment="CENTER" styleClass="content">
+                    <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                              <Button fx:id="btnBrowse" mnemonicParsing="false" text="Browse" />
+                              <Label fx:id="lblFile" disable="true" text="no file selected" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <CheckBox fx:id="cbChunks" mnemonicParsing="false" text="Send in chunks (MB):" />
+                        <Slider fx:id="slider" showTickLabels="true" showTickMarks="true" snapToTicks="true" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tfChunkVal" alignment="CENTER" prefColumnCount="4" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                    </children>
+                </VBox>
+                <ToolBar>
+                    <items>
+                        <Label text="Configuration" />
+                    </items>
+                    <VBox.margin>
+                        <Insets right="1.0" />
+                    </VBox.margin>
+                </ToolBar>
+                <VBox styleClass="content">
+                    <children>
+                        <CheckBox fx:id="cbEncrypt" mnemonicParsing="false" selected="true" text="Enable encryption (AES/GCM)" />
+                        <CheckBox fx:id="cbTellServer" mnemonicParsing="false" selected="true" styleClass="child-check-box-first" text="Tell server we do encryption">
+                            <tooltip>
+                                <Tooltip text="If not, then server will save the bytes as they are received without decryption applied." />
+                            </tooltip>
+                        </CheckBox>
+                        <CheckBox fx:id="cbManipulate" mnemonicParsing="false" styleClass="child-check-box-second" text="Manipulate a bit in the middle of the stream">
+                            <tooltip>
+                                <Tooltip text="This will (should) cause the authentication part of GCM to fail." />
+                            </tooltip>
+                        </CheckBox>
+                        <Separator />
+                        <FlowPane styleClass="strategy">
+                            <children>
+                                <Label text="Server's binary message receiving strategy:" />
+                                <ComboBox fx:id="cbStrategy" />
+                            </children>
+                        </FlowPane>
+                        <Label fx:id="lblDescription" text="Select a strategy and this text will change to a description thereof." wrapText="true" />
+                    </children>
+                </VBox>
+                <ToolBar>
+                    <items>
+                        <Label text="Transmit" />
+                    </items>
+                    <VBox.margin>
+                        <Insets right="1.0" />
+                    </VBox.margin>
+                </ToolBar>
+                <StackPane styleClass="content-last" VBox.vgrow="NEVER">
+                    <children>
+                        <Button fx:id="btnSend" mnemonicParsing="false" text="Send" />
+                    </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+                </StackPane>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

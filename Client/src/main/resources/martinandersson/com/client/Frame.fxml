@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.collections.FXCollections ?>
+
+<BorderPane fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="frame" stylesheets="@Frame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <Pagination fx:id="pagination" BorderPane.alignment="CENTER" />
+    </center>
+    <top>
+        <VBox>
+            <children>
+                <GridPane styleClass="top" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints fx:id="column1" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <StackPane fx:id="topColumn1">
+                            <children>
+                                <Label fx:id="topLabel1" text="Connect" />
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="topColumn2" GridPane.columnIndex="1">
+                            <children>
+                                <Label fx:id="topLabel2" text="Login" />
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="topColumn3" GridPane.columnIndex="2">
+                            <children>
+                                <Label fx:id="topLabel3" text="Send files" />
+                            </children>
+                        </StackPane>
+                    </children>
+                </GridPane>
+            <Separator />
+            </children>
+        </VBox>
+    </top>
+   <effect>
+      <InnerShadow color="#00000034" height="20.0" offsetY="1.0" radius="9.5" width="20.0" />
+   </effect>
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Separator />
+            <GridPane hgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <CheckBox fx:id="alwaysOnTop" mnemonicParsing="false" selected="true" text="Always on top" />
+                  <Hyperlink fx:id="homepage" text="http://www.martinandersson.com" GridPane.columnIndex="1" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
