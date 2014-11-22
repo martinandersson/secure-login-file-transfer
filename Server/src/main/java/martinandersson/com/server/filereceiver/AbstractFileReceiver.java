@@ -294,7 +294,7 @@ public abstract class AbstractFileReceiver<T extends MessageHandler> implements 
         
         IOException oops = null;
         
-        for (int i = 0; i < ceiling; ++i) { // <-- see comment in mergeChunks()
+        for (int i = 0; i < ceiling; ++i) {
             Path chunk = chunks.get(i);
             try {
                 Files.delete(chunk); }
