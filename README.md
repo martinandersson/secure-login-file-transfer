@@ -146,8 +146,8 @@ If you have a question, feel free to drop me an email: <webmaster@martinandersso
 [Nimbus]:http://connect2id.com/products/nimbus-srp
 [docx]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/raw/master/My%20GCM%20Research.docx
 [pdf]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/raw/master/My%20GCM%20Research.pdf
-[Copy InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L11
-[No-use InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L14
-[Single-byte InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L17
-[byte array]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L20
-[ByteBuffer]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L23
+[Copy InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L10
+[No-use InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L13
+[Single-byte InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L16
+[byte array]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L19
+[ByteBuffer]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L22
