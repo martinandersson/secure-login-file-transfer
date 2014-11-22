@@ -94,7 +94,7 @@ Browsing for a file should be a no brainer. Be sure to select a file that is not
 
 Sending really large files can be troublesome and depends on whether or not encryption is enabled, and it depends on the chosen strategy for receiving the file on the server. I haven't experimented with the software myself so much that I can say exactly how each factor play out. Sending large files using encryption and the default SunJCE provider which this software use, **is** problematic due to [internal buffering](http://stackoverflow.com/q/26920906/1268003).
 
-Therefore, *the file may be sent in chunks*. Simply tick the "Send in chunks" radiobutton and select a chunk size. This will make the client send the file in chunks. The server will save each chunks to a temporary file in his ordinary save folder, and once all chunks has been transferred, the chunks are merged into one file and deleted.
+Therefore, *the file may be sent in chunks*. Simply tick the "Send in chunks" radio button and select a chunk size. This will make the client send the file in chunks. The server will save each chunks to a temporary file in his ordinary save folder, and once all chunks has been transferred, the chunks are merged into one file and deleted.
 
 It is expected that an encrypted and chunked file transfer is faster than sending an encrypted file in one piece. However, my experience has shown me that it is *dramatically much faster* and that one gain a huge amount of speed even when chunked file transfer is enabled to send unencrypted files.
 
@@ -105,7 +105,7 @@ Tick "Enable encryption (AES/GCM)" to **enable encryption**. Otherwise, the file
 
 If you enable encryption, then you have one more option. You may **tell the server about it**. Of course, you should tell the server. Otherwise the server will not decrypt the file but save the bytes as is. It could be fun to send an encrypted text document to the server and see the ciphertext in your favorite text editor. But please note that if you don't tell the server, the endpoints will become out of sync and all files sent thereafter will be rejected, unable to authenticate. Reason is that for each file or chunk transfer, the client and the server [reinitialize](https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/AesGcmCipher.java#L124) their Cipher instance with a new [initialization vector](http://en.wikipedia.org/wiki/Initialization_vector) (IV) that depends on a message counter. Hence, the two endpoints will become unsynchronized. All future GCM [authentication tags](http://en.wikipedia.org/wiki/Message_authentication_code) sent by the client and the authentication tags computed by the server will not be the same making the server reject all future transfers. If you experiment by sending a file encrypted without telling the server, then you must restart the client afterwards and thereby use a new session.
 
-If you enable encryption, and tell the server about it, then you have a third option: **manipulate a bit in the middle of the stream**. This is a feature you may use to test the authentication part of GCM. The "manipulation" is effectively [man-in-the-middle attack](http://en.wikipedia.org/wiki/Man-in-the-middle_attack). If you chose to manipulate a bit in the middle of the stream, you'll notice that halfway through the file transfer, the client will change just one single bit of all the bits sent to the server and then print a log message (it is always the least significant bit that is flipped):
+If you enable encryption, and tell the server about it, then you have a third option: **manipulate a bit in the middle of the stream**. This is a feature you may use to test the authentication part of GCM. The "manipulation" is effectively a [man-in-the-middle attack](http://en.wikipedia.org/wiki/Man-in-the-middle_attack). If you chose to manipulate a bit in the middle of the stream, you'll notice that halfway through the file transfer, the client will change just one single bit of all the bits sent to the server and then print a log message (it is always the least significant bit that is flipped):
 
 ```
 INFO: Manipulated byte 01100000 to 01100001
@@ -115,7 +115,7 @@ This must have the outcome of failing authentication:
 
 ![Send files][Screen5]
 
-Here is a cheatsheet for all available strategies the server may use to receive binary data. Click on the link in the left column to read a strategy description, click on the link in the right column to read some code.
+Here is a cheatsheet of all available strategies the server may use to receive binary data.
 
 | Strategy | Implementing class | Description |
 | -------- | ------------------ | ----------- |
@@ -146,8 +146,8 @@ If you have a question, feel free to drop me an email: <webmaster@martinandersso
 [Nimbus]:http://connect2id.com/products/nimbus-srp
 [docx]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/raw/master/My%20GCM%20Research.docx
 [pdf]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/raw/master/My%20GCM%20Research.pdf
-[Copy InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L11
-[No-use InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L14
-[Single-byte InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L17
-[byte array]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L20
-[ByteBuffer]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L23
+[Copy InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L10
+[No-use InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L13
+[Single-byte InputStream]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L16
+[byte array]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L19
+[ByteBuffer]:https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Library/src/main/java/martinandersson/com/library/ServerStrategy.java#L22
