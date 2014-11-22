@@ -64,7 +64,7 @@ public class FileSender extends Task<Long>
                                  confirmationDurations = new ArrayList<>();
     
     /**
-     * Problem "description" returned by server if he failed to receive the file.
+     * Problem "description" returned by server if he failed to receive the file/chunk.
      */
     private String problem;
     
@@ -166,14 +166,14 @@ public class FileSender extends Task<Long>
         
         try (FileChannel in = FileChannel.open(file, StandardOpenOption.READ)) {
             while (__transferChunk(in, TOT) & !__waitForConfirmation()) {
-                ; // All work done in transferChunk() and waitForCofirmation()
+                ; // All work done in transferChunk() and waitForConfirmation()
             }
         }
         
         taskDuration = Duration.between(taskStart, Instant.now());
         
         /*
-         * If chunkSize < TOT, then we're sending the file in pieces, so if
+         * If chunkSize < TOT, then wewe sent the file in pieces, so if
          * problem.isEmpty() (all chunks succeeded without any problems), then
          * we need to tell the server we're not gonna send him anything more.
          * 
