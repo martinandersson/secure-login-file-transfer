@@ -99,8 +99,8 @@ public class ServerConnection
      *      that field."
      * 
      * Negate the logic and we also get that a read of the field must happen
-     * after a preceding write of the field - not that is matter for this
-     * discussion.
+     * after a preceding write of the field - not that it matter much per se for
+     * this discussion.
      * 
      * So, why the extra "conn" variable then? Well according to Wikipedia:
      * 
@@ -108,12 +108,12 @@ public class ServerConnection
      * 
      * Accessing the volatile field just once can improve the performance by up
      * to 25 percent. Don't believe it? Apparently, the implementation of
-     * File.toPath() do so who am I to disagree.
+     * File.toPath() do - so who am I to disagree.
      * 
      * Also, note that an enum is the only really safe way to create a singleton
      * in Java and doesn't require application code to handle synchronization.
      * An enum should be the preferred method to achieve static lazy
-     * initialization. Joshua Bloch's book Effective Java has some cool
+     * initialization. Joshua Bloch's book "Effective Java" has some cool
      * information to share about the safety of singletons.
      */
     private static volatile ServerConnection instance = null;
