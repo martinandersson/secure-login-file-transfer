@@ -30,13 +30,17 @@ import martinandersson.com.library.ServerStrategy;
 import org.controlsfx.dialog.Dialogs;
 
 /**
- *
+ * A JavaFX task that send a file to the server.
+ * 
  * @author Martin Andersson (webmaster at martinandersson.com)
  */
 public class FileSender extends Task<Long>
 {
     private static final Logger LOGGER = Logger.getLogger(FileSender.class.getName());
     
+    /**
+     * Is preferred buffer size, might be overridden by a smaller chunk size.
+     */
     private static final int BUFFER_SIZE = 8192;
     
     
@@ -59,18 +63,19 @@ public class FileSender extends Task<Long>
     private final List<Duration> chunkDurations = new ArrayList<>(),
                                  confirmationDurations = new ArrayList<>();
     
-    /** Problem "description" returned by server if he failed to receive the file. */
+    /**
+     * Problem "description" returned by server if he failed to receive the file.
+     */
     private String problem;
     
     
     
     /**
+     * Initializes a newly constructed {@code FileSender} with the specified
+     * file to send and a server receiving strategy.
      * 
-     * @param file
-     * @param chunkSize
-     * @param pieces
-     * @param strategy
-     * @param cipher may be {@code null}, in which case data will not be encrypted
+     * @param file file to send
+     * @param strategy the strategy the server should use to receive the file
      */
     public FileSender(Path file, ServerStrategy strategy) {
         this.file = file;
@@ -168,9 +173,10 @@ public class FileSender extends Task<Long>
         taskDuration = Duration.between(taskStart, Instant.now());
         
         /*
-         * chunkSize < TOT: We're sending the file in pieces, so if
+         * If chunkSize < TOT, then we're sending the file in pieces, so if
          * problem.isEmpty() (all chunks succeeded without any problems), then
          * we need to tell the server we're not gonna send him anything more.
+         * 
          * If there was a problem, then the server already know and assume that
          * no more chunks will be sent.
          */
@@ -208,12 +214,18 @@ public class FileSender extends Task<Long>
     }
     
     /**
+     * Send a chunk to the server.<p>
      * 
-     * @param in
-     * @param fileSize
-     * @return whether or not here are more bytes to read from file
-     * @throws GeneralSecurityException
-     * @throws IOException 
+     * The chunk might be the entire file of course.
+     * 
+     * @param in channel to read from
+     * @param fileSize total file size
+     * 
+     * @return {@code true} if there are more bytes to read from the file,
+     *         otherwise {@code false}
+     * 
+     * @throws GeneralSecurityException if cipher errors
+     * @throws IOException if IO errors
      */
     private boolean __transferChunk(FileChannel in, long fileSize) throws GeneralSecurityException, IOException {
         final long MID = fileSize / 2;
@@ -225,15 +237,15 @@ public class FileSender extends Task<Long>
         ByteBuffer encoded = null;
         
         if (cipher != null) {
-            c = cipher.initForEncryption();
-            encoded = ByteBuffer.allocate(BUFFER + getAuthenticationTagLength(c));
+            c = cipher.initForEncryption(); // <-- GeneralSecurityException
+            encoded = ByteBuffer.allocate(BUFFER + getAuthenticationTagLength(c)); // <-- GeneralSecurityException
         }
         
         boolean manipulate = this.manipulate.orElse(false);
         
         Instant chunkStart = Instant.now();
         
-        try (WritableByteChannel out = Channels.newChannel(conn.getOutputStream())) {
+        try (WritableByteChannel out = Channels.newChannel(conn.getOutputStream())) { // <-- IOException
             long bytesLeft = chunkSize;
             int r = 0;
             
@@ -260,14 +272,14 @@ public class FileSender extends Task<Long>
                         }
 
                         encoded.flip();
-                        w = out.write(encoded);
+                        w = out.write(encoded); // <-- IOException
                     }
                     else {
                         w = 0;
                     }
                 }
                 else { // .. just write plaintext as-is:
-                    w = out.write(raw);
+                    w = out.write(raw); // <-- IOException
                 }
 
                 sent += w;
@@ -278,8 +290,8 @@ public class FileSender extends Task<Long>
             }
 
             if (cipher != null) {
-                final byte[] residue = c.doFinal();
-                final int tLen = getAuthenticationTagLength(c);
+                final byte[] residue = c.doFinal(); // <-- GeneralSecurityException
+                final int tLen = getAuthenticationTagLength(c); // <-- GeneralSecurityException
 
                 if (residue.length > tLen) {
 
@@ -296,7 +308,7 @@ public class FileSender extends Task<Long>
                             DatatypeConverter.printHexBinary(residue));
                 }
 
-                sent += out.write(ByteBuffer.wrap(residue));
+                sent += out.write(ByteBuffer.wrap(residue)); // <-- IOException
             }
             
             chunkDurations.add(Duration.between(chunkStart, Instant.now()));
@@ -305,8 +317,9 @@ public class FileSender extends Task<Long>
     }
     
     /**
+     * Wait for server to confirm a chunk (or file) received.
      * 
-     * @return {@code true} if there was a problem..
+     * @return {@code true} if server reported a problem, otherwise {@code false}
      */
     private boolean __waitForConfirmation() throws InterruptedException {
         final Instant confStart = Instant.now();
