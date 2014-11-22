@@ -63,7 +63,7 @@
               </rowConstraints>
                <children>
                   <CheckBox fx:id="alwaysOnTop" mnemonicParsing="false" selected="true" text="Always on top" />
-                  <Hyperlink fx:id="homepage" text="http://www.martinandersson.com" GridPane.columnIndex="1" />
+                  <Hyperlink fx:id="homepage" text="https://github.com/MartinanderssonDotcom/secure-login-file-transfer/" GridPane.columnIndex="1" />
                </children>
                <padding>
                   <Insets bottom="5.0" top="5.0" />
