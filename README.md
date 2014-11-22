@@ -115,7 +115,7 @@ This must have the outcome of failing authentication:
 
 ![Send files][Screen5]
 
-Here is a cheatsheet for all available strategies the server may use to receive binary data.
+Here is a cheatsheet of all available strategies the server may use to receive binary data.
 
 | Strategy | Implementing class | Description |
 | -------- | ------------------ | ----------- |
