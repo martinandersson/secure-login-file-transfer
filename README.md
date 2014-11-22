@@ -26,7 +26,7 @@ java -jar client-1.0.0-SNAPSHOT.jar
 ```
 ..or not using a console attached:
 ```cmd
-javaws -jar client-1.0.0-SNAPSHOT.jar
+javaw -jar client-1.0.0-SNAPSHOT.jar
 ```
 However, it is most recommended that you do keep the console open as the client (and server) log many important and interesting things such as salt, computed key, messages sent and received et cetera (this application is for testing purposes only!). I usually run the client and deploy the server war file using NetBeans IDE only which is working flawlessly. With that said, I haven't tested any other configuration. If you use another IDE and find problems with the build, let me know or contribute okay =)
 
