@@ -96,10 +96,10 @@ public final class AesGcmCipher
     public Cipher initForEncryption() throws InvalidKeyException, InvalidAlgorithmParameterException {
         /*
          * Had we provided a "new IvParameterSpec(IV)" instead of
-         * GCMParameterSpec, then the following call would crash with:
+         * GCMParameterSpec, then the next statement would crash with:
          *     java.security.InvalidAlgorithmParameterException: Unsupported parameter: javax.crypto.spec.IvParameterSpec@208061ba
          * 
-         * If we try to reuse IV, we get (on the second initiation):
+         * If we try to reuse IV, we get on the second initiation:
          *     java.security.InvalidAlgorithmParameterException: Cannot reuse iv for GCM encryption
          * 
          * If you google this exception, you'll see that the implementation only
