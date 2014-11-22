@@ -53,11 +53,11 @@ import martinandersson.com.server.filereceiver.SingleByteInputStreamFileReceiver
  *   <li>Client may send a file:<ol>
  *      <li>Client send a request for a file transfer, providing 1) file name,
  *          2) server's receiving strategy, 3) whether or not to use encryption,
- *          and 3) if the transfer will chunked.</li>
+ *          and 3) if the transfer will be chunked.</li>
  *      <li>Server will setup his message handler and respond with an accept.</li>
  *      <li>Client begin sending bytes. If the file transfer was chunked, then
- *          client must end with an end-of-file message once all chunks has been
- *          transfered.</li></ol></li>
+ *          client must complete the process with an end-of-file message once
+ *          all chunks has been transferred.</li></ol></li>
  * </ol>
  * 
  * Unless something really unexpected happens, client may repeat step 3 for as
@@ -76,7 +76,7 @@ import martinandersson.com.server.filereceiver.SingleByteInputStreamFileReceiver
  * encrypted. All other messages exchanged are not encrypted.<p>
  * 
  * This endpoint is not production friendly. The whole application is a
- * "proof-of-concept" with the chief goal of demonstrating SRP, AES/GCM and
+ * "proof of concept" with the chief goal of demonstrating SRP, AES/GCM and
  * binary data transfers over WebSocket. For example, a production friendly
  * endpoint would definitely close the client if he sends unauthenticated data,
  * which this implementation does not do.<p>
