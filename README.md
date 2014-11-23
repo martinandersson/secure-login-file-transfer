@@ -52,7 +52,7 @@ The connect button will lit up once you have chosen a URL the client should use.
   - [`MyWebSocket`](https://github.com/MartinanderssonDotcom/secure-login-file-transfer/blob/master/Server/src/main/java/martinandersson/com/server/MyWebSocket.java)
 
 ### User registration and authentication
-After the client connect, a registration/login screen will appear.
+After the client connect, next screen let you register and authenticate/login a user.
 
 ![Registering and authenticating a user][Screen3]
 
