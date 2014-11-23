@@ -7,7 +7,7 @@ This is a proof of concept Java application that demonstrates:
 
 This application is able to login/authenticate a user without providing the server a password, and then transmit files securely using an insecure channel. Both ends will compute a fresh symmetric key used for the session only and the server need not publish a public key or use a third party certificate authority.
 
-The application uses [Nimbus] as the SRP provider, and the default SunJCE provider for all cryptographic tasks.
+The application uses [Nimbus] as the SRP provider, and the default SunJCE provider for all cryptographic tasks (unless your Java configuration says something else).
 
 ### Front end client
 The human user (you) launch a rich client built using JavaFX and may dynamically select which file to transfer, whether or not the file transfer shall be chunked, encrypted, or even if the sent bytes should be manipulated to test GCM:s ability to authenticate messages. The GUI will report time to transfer the file and the time server needed for decryption.
