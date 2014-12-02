@@ -13,7 +13,7 @@ import martinandersson.com.client.ServerConnection;
 import martinandersson.com.library.Constants;
 
 /**
- * Is the client's view the SRP authentication process and outbound messages
+ * Is the client's view of the SRP authentication process and outbound messages
  * sent to the server connection as required by the authentication procedure.<p>
  * 
  * Once the user is authenticated, his session key may be retrieved using

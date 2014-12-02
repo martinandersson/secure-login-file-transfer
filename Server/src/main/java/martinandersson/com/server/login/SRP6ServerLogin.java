@@ -62,7 +62,12 @@ public class SRP6ServerLogin
      * the same logic as a predicate that return {@code false}. Then the
      * exception will be rethrowed.<p>
      * 
-     * Previously assigned key tests are replaced with no warning.
+     * Previously assigned key tests are replaced with no warning.<p>
+     * 
+     * Note that the predicate is called when server has authenticated the
+     * client (received and approved 'M1', then sent 'M2'). In the real world,
+     * it is still possible for the client to not authenticate the server
+     * (client received but did not approve 'M2').
      * 
      * @param keyTest key tester
      */

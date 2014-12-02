@@ -6,7 +6,7 @@ import javax.json.JsonObject;
 import martinandersson.com.library.Constants;
 
 /**
- * Qoute from: http://en.wikipedia.org/wiki/Secure_Remote_Password_protocol
+ * Quote from: http://en.wikipedia.org/wiki/Secure_Remote_Password_protocol
  * 
  * <pre>{@code
  * 
