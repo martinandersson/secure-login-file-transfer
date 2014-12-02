@@ -62,7 +62,8 @@ public class SRP6ServerLogin
      * the same logic as a predicate that return {@code false}. Then the
      * exception will be rethrowed.<p>
      * 
-     * Previously assigned key tests are replaced with no warning.<p>
+     * Previously assigned key tests are replaced with no warning. Providing
+     * {@code null} is legal and may discard a previously stored key tester.<p>
      * 
      * Note that the predicate is called when server has authenticated the
      * client (received and approved 'M1', then sent 'M2'). In the real world,
