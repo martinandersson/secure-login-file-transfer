@@ -120,6 +120,13 @@ public final class AesGcmCipher
     private byte[] getNextIV() {
         ByteBuffer iv = ByteBuffer.allocate(16);
         
+        /*
+         * Do I feel honored or what. A real professional just said the next
+         * piece of code is "quite safe".
+         * 
+         * See commentary in http://stackoverflow.com/q/27361148/1268003 
+         */
+        
         iv.put(ivFixed);
         iv.put(ByteBuffer.allocate(8).putLong(++ivInvocation).array());
         
