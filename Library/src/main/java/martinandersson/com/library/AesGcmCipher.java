@@ -124,7 +124,7 @@ public final class AesGcmCipher
          * Do I feel honored or what. A real professional just said the next
          * piece of code is "quite safe".
          * 
-         * See commentary in http://stackoverflow.com/q/27361148/1268003 
+         * Source: http://stackoverflow.com/questions/27361148#comment-43184307
          */
         
         iv.put(ivFixed);
