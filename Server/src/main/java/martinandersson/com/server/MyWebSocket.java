@@ -1,7 +1,5 @@
 package martinandersson.com.server;
 
-import martinandersson.com.server.login.Credentials;
-import martinandersson.com.server.login.SRP6ServerLogin;
 import com.nimbusds.srp6.SRP6Exception;
 import com.nimbusds.srp6.SRP6Exception.CauseType;
 import java.io.IOException;
@@ -40,6 +38,8 @@ import martinandersson.com.server.filereceiver.CopyInputStreamFileReceiver;
 import martinandersson.com.server.filereceiver.FileReceiver;
 import martinandersson.com.server.filereceiver.NoUseInputFileReceiver;
 import martinandersson.com.server.filereceiver.SingleByteInputStreamFileReceiver;
+import martinandersson.com.server.login.Credentials;
+import martinandersson.com.server.login.SRP6ServerLogin;
 
 /**
  * The server endpoint receive messages from client and respond according to the
@@ -60,8 +60,8 @@ import martinandersson.com.server.filereceiver.SingleByteInputStreamFileReceiver
  *          all chunks has been transferred.</li></ol></li>
  * </ol>
  * 
- * Unless something really unexpected happens, client may repeat step 3 for as
- * many times as he want to until the client disconnect.<p>
+ * Unless something really unexpected happens, client may continue to send files
+ * for as many times as he want to until the client disconnect.<p>
  * 
  * The server store all files and file chunks in a folder that is hard coded as
  * a constant in this class, namely {@code SAVE_DIR} (current value:
@@ -240,7 +240,7 @@ public class MyWebSocket
              * reported back to client because that can only mean that the file
              * wasn't properly received. I ignore that in this test project.
              */
-            LOGGER.log(Level.WARNING, "Failed to merge or delete file chunks after comleting a chunked file transfer.", e);
+            LOGGER.log(Level.WARNING, "Failed to merge or delete file chunks after completing a chunked file transfer.", e);
         }
 
         receiver = null;
@@ -312,8 +312,12 @@ public class MyWebSocket
     private void trace(String method, Object... args) {
         LOGGER.info(() -> {
             String prefix = "ENTER " + method + ", ARGS: ";
-            String args2 = Stream.of(args).map(Object::toString).collect(Collectors.joining());
-            return prefix + args2;
+            
+            String stringified = Stream.of(args)
+                    .map(Object::toString)
+                    .collect(Collectors.joining());
+            
+            return prefix + stringified;
         });
     }
 }
