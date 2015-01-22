@@ -53,7 +53,7 @@ import martinandersson.com.server.login.SRP6ServerLogin;
  *   <li>Client may send a file:<ol>
  *      <li>Client send a request for a file transfer, providing 1) file name,
  *          2) server's receiving strategy, 3) whether or not to use encryption,
- *          and 3) if the transfer will be chunked.</li>
+ *          and 4) if the transfer will be chunked.</li>
  *      <li>Server will setup his message handler and respond with an accept.</li>
  *      <li>Client begin sending bytes. If the file transfer was chunked, then
  *          client must complete the process with an end-of-file message once
