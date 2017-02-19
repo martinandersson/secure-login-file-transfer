@@ -16,9 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javax.websocket.DeploymentException;
+import martinandersson.com.client.Dialogs;
 import martinandersson.com.client.FrameController;
 import martinandersson.com.client.ServerConnection;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  * Controller of page 1: connect to server.
@@ -40,10 +40,10 @@ public class Page1Controller implements PageController
     private RadioButton rbCustom;
     
     @FXML
-    private RadioButton rbWildFly;
+    private RadioButton rbStandard;
     
     @FXML
-    private RadioButton rbGlassFish;
+    private RadioButton rbOldGlassFish;
     
     @FXML
     private TextField tfCustom;
@@ -65,8 +65,8 @@ public class Page1Controller implements PageController
         
         BooleanBinding radioSelected
                 = rbCustom.selectedProperty().and(tfCustom.textProperty().isNotEmpty()).or(
-                  rbWildFly.selectedProperty()).or(
-                  rbGlassFish.selectedProperty());
+                  rbStandard.selectedProperty()).or(
+                  rbOldGlassFish.selectedProperty());
         
         btnConnect.disableProperty().bind(
                 radioSelected.not().or(loading));
@@ -93,7 +93,7 @@ public class Page1Controller implements PageController
                 frameController.gotoNextPage();
             }
             catch (DeploymentException | IOException e) {
-                Platform.runLater(() -> Dialogs.create().showException(e));
+                Platform.runLater(() -> Dialogs.showThrowable(e, btnConnect.getScene().getWindow()));
             }
             finally {
                 Platform.runLater(() -> loading.set(false));
@@ -109,10 +109,10 @@ public class Page1Controller implements PageController
         if (t == rbCustom) {
             url = tfCustom.getText().trim();
         }
-        else if (t == rbWildFly) {
+        else if (t == rbStandard) {
             url = "ws://localhost:8080/Server-1.0.0-SNAPSHOT/mywebsocket";
         }
-        else if (t == rbGlassFish) {
+        else if (t == rbOldGlassFish) {
             url = "ws://localhost:8080/Server/mywebsocket";
         }
         else {

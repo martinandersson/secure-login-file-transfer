@@ -27,8 +27,8 @@
                               <TextField fx:id="tfCustom" maxWidth="1.7976931348623157E308" promptText="Type in a custom URL" HBox.hgrow="ALWAYS" />
                           </children>
                       </HBox>
-                      <RadioButton fx:id="rbWildFly" mnemonicParsing="false" text="WildFly (ws://localhost:8080/Server-1.0.0-SNAPSHOT/mywebsocket)" toggleGroup="$radioButtons" />
-                      <RadioButton fx:id="rbGlassFish" mnemonicParsing="false" text="GlassFish (ws://localhost:8080/Server/mywebsocket)" toggleGroup="$radioButtons" />
+                      <RadioButton fx:id="rbStandard" mnemonicParsing="false" text="WildFly &amp; GlassFish 4.1.1 (ws://localhost:8080/Server-1.0.0-SNAPSHOT/mywebsocket)" toggleGroup="$radioButtons" />
+                      <RadioButton fx:id="rbOldGlassFish" mnemonicParsing="false" text="GlassFish &lt;= 4.1 (ws://localhost:8080/Server/mywebsocket)" toggleGroup="$radioButtons" />
                   </children>
               </VBox>
               <Button fx:id="btnConnect" mnemonicParsing="false" text="Connect" />

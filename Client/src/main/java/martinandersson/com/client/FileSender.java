@@ -27,7 +27,6 @@ import javax.json.JsonObjectBuilder;
 import javax.xml.bind.DatatypeConverter;
 import martinandersson.com.library.AesGcmCipher;
 import martinandersson.com.library.ServerStrategy;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  * A JavaFX task that send a file to the server.
@@ -46,21 +45,23 @@ public class FileSender extends Task<Long>
     
     
     private final Path file;
+    
     private long chunkSize;
     
     private final ServerStrategy strategy;
     
-    private Optional<Boolean> tell = Optional.empty();
-    private Optional<Boolean> manipulate = Optional.empty();
+    private Optional<Boolean> tell       = Optional.empty(),
+                              manipulate = Optional.empty();
     
     private final ServerConnection conn;
+    
     private AesGcmCipher cipher;
     
     private long sent;
     
     private Duration taskDuration;
     
-    private final List<Duration> chunkDurations = new ArrayList<>(),
+    private final List<Duration> chunkDurations        = new ArrayList<>(),
                                  confirmationDurations = new ArrayList<>();
     
     /**
@@ -155,9 +156,7 @@ public class FileSender extends Task<Long>
         updateMessage("Sending file transmission request to server..\n");
         updateProgress(-1L, -1L);
         
-        if (!__sendFileTransferRequest(TOT)) {
-            return 0L;
-        }
+        __sendFileTransferRequest(TOT);
         
         updateMessage(reportBytesLeft(TOT));
         updateProgress(0L, TOT);
@@ -187,7 +186,7 @@ public class FileSender extends Task<Long>
         return sent;
     }
     
-    private boolean __sendFileTransferRequest(long fileSize) throws InterruptedException {
+    private void __sendFileTransferRequest(long fileSize) throws InterruptedException {
         // What happens if we don't tell server? Apparently, the file goes away over the wire?
         JsonObjectBuilder b = Json.createObjectBuilder();
         
@@ -201,16 +200,8 @@ public class FileSender extends Task<Long>
         updateMessage("Waiting for server accept..\n");
         
         if (!conn.receiveNext().getBoolean("accept")) {
-            cancel();
-            Dialogs.create()
-                    .title("Fail!")
-                    .message("Server did not accept the request to send a file.")
-                    .showWarning();
-            
-            return false;
+            throw new RuntimeException("Server did not accept the request to send a file.");
         }
-        
-        return true;
     }
     
     /**

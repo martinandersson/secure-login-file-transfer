@@ -29,13 +29,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
+import martinandersson.com.client.Dialogs;
 import martinandersson.com.client.FileSender;
 import martinandersson.com.client.ServerConnection;
 import martinandersson.com.library.AesGcmCipher;
 import martinandersson.com.library.ServerStrategy;
-import org.controlsfx.dialog.Dialogs;
+import org.controlsfx.dialog.ProgressDialog;
 
 /**
  * Controller of page 3: send files.
@@ -64,7 +66,9 @@ public class Page3Controller implements PageController
     private TextField tfChunkVal;
     
     @FXML
-    private CheckBox cbEncrypt, cbTellServer, cbManipulate;
+    private CheckBox cbEncrypt,
+                     cbTellServer,
+                     cbManipulate;
     
     @FXML
     private ComboBox<ServerStrategy> cbStrategy;
@@ -287,15 +291,16 @@ public class Page3Controller implements PageController
             
             sender.manipulateBitInMiddle(cbManipulate.isSelected());
             
-            Dialogs.create()
-                    .owner(btnSend.getScene().getWindow())
-                    .showWorkerProgress(sender);
+            ProgressDialog pd = new ProgressDialog(sender);
+            pd.setTitle("Sending file..");
+            pd.initOwner(btnSend.getScene().getWindow());
+            pd.show();
 
             sender.setOnSucceeded(workerStateEvent -> {
-                String problem = sender.getProblem();
+                final String problem = sender.getProblem(),
+                             header  = "Successfully sent: " + sender.getBytesSent() + " byte(s)!";
                 
-                StringBuilder msg = new StringBuilder()
-                        .append("Successfully sent: ").append(sender.getBytesSent()).append(" byte(s)!\n\n");
+                final StringBuilder msg = new StringBuilder();
                 
                 if (problem.isEmpty()) {
                     msg.append("Server had nothing to complain about.");
@@ -310,25 +315,18 @@ public class Page3Controller implements PageController
                    .append("Server's time to respond (decryption if enabled): ").append(sender.getConfirmationDurationTotal()).append("\n\n")
                    .append("Total working time: ").append(sender.getTaskDuration());
                 
-                Dialogs d = Dialogs.create()
-                        .owner(btnSend.getScene().getWindow())
-                        .title(file.get() + " sent!")
-                        .message(msg.toString());
+                final Window owner = btnSend.getScene().getWindow();
                 
                 if (problem.isEmpty()) {
-                    d.showInformation();
+                    Dialogs.showInformation(owner, "File sent", header, msg.toString());
                 }
                 else {
-                    d.showWarning();
+                    Dialogs.showWarning(owner, "File sent", header, msg.toString());
                 }
             });
             
             sender.setOnFailed(workerStateEvent ->
-                Dialogs.create()
-                        .owner(btnSend.getScene().getWindow())
-                        .message("Something went terribly wrong :'(")
-                        .title("Error")
-                        .showException(sender.getException()));
+                    Dialogs.showThrowable(sender.getException(), btnSend.getScene().getWindow()));
             
             sender.runningProperty().addListener(observable -> {
                 if (!sender.isRunning()) {
@@ -380,13 +378,10 @@ public class Page3Controller implements PageController
         return String.valueOf(Math.round(slider.getValue()));
     }
     
-    private void logAndDisplay(String title, String message, Exception e) {
-        LOGGER.log(Level.SEVERE, message, e);
+    private void logAndDisplay(String title, String header, Exception e) {
+        LOGGER.log(Level.SEVERE, header, e);
         
         Platform.runLater(() ->
-                Dialogs.create()
-                        .title(title)
-                        .message(message)
-                        .showException(e));
+                Dialogs.showThrowable(e, btnSend.getScene().getWindow(), title, header));
     }
 }
